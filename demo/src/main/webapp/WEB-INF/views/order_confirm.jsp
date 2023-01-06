@@ -15,8 +15,8 @@
 </head>
 
 <!-- 서버 환경별 페이플 해외카드 결제 스크립트 -->
-<script src="https://demo-gpay.payple.kr/common/js/gpay-1.0.0.js"></script>
-<!--<script src="https://gpay.payple.kr/common/js/gpay-1.0.0.js"></script> -->
+<script src="https://demo-gpay.payple.kr/common/js/gpay-1.0.1.js"></script>
+<!--<script src="https://gpay.payple.kr/common/js/gpay-1.0.1.js"></script> -->
 <script>
 	$(document).ready(function() {
 		const orderConfirmFormSubmit = function gpayOrderConfirmFormSubmit() {
@@ -30,21 +30,16 @@
 			 * (단, 결제창에 필드값만 해당 - service_oid , isDirect 제외)
 			 */
 			let obj = {};
-      		obj.Authorization = "${access_token}";					// [필수] 발급받은 Access Token
-			obj.service_id = "${service_id}"; 									// [필수] 파트너 ID
-			obj.service_oid = "${service_oid}"; 								// [선택] 주문번호(미지정하는 경우 페이플에서 임의로 지정)
-			obj.comments = "${comments}"; 											// [필수] 상품명
-			obj.totalAmount = "${totalAmount}"; 								// [필수] 결제 요청금액
-			obj.currency = "${currency}"; 											// [필수] 통화
-			obj.firstName = "${firstName}"; 										// [선택] 카드소유주 이름
-			obj.lastName = "${lastName}"; 											// [선택] 카드소유주 성
-			obj.country = "${country}"; 												// [선택] 국가
-			obj.administrativeArea = "${administrativeArea}"; 	// [선택] 국가가 미국(US), 혹은 캐나다(CA)인 경우에만 필요한 값으로, 이외 국가의 경우에는 필요하지 않은 값입니다.
-			obj.locality = "${locality}"; 											// [선택] 시/구/군
-			obj.address1 = "${address1}"; 											// [선택] 도로명
-			obj.postalCode = "${postalCode}"; 									// [선택] 우편번호
-			obj.email = "${email}"; 														// [선택] 이메일 주소
-			obj.phoneNumber = "${phoneNumber}"; 								// [선택] 휴대전화 번호
+      		obj.Authorization = "${access_token}";			// [필수] 발급받은 Access Token
+			obj.service_id = "${service_id}"; 				// [필수] 파트너 ID
+			obj.service_oid = "${service_oid}"; 			// [선택] 주문번호(미지정하는 경우 페이플에서 임의로 지정)
+			obj.comments = "${comments}"; 					// [필수] 상품명
+			obj.totalAmount = "${totalAmount}"; 			// [필수] 결제 요청금액
+			obj.currency = "${currency}"; 					// [필수] 통화
+			obj.firstName = "${firstName}"; 				// [선택] 카드소유주 이름
+			obj.lastName = "${lastName}"; 					// [선택] 카드소유주 성
+			obj.email = "${email}"; 						// [선택] 이메일 주소
+			obj.phoneNumber = "${phoneNumber}"; 			// [선택] 휴대전화 번호
 			/**
 			 * [필수] 결제결과 반환(Return) URL
 			 * - 결제완료 후 결제결과 파라미터와 함께 리다이렉트 되는 URL 로, 

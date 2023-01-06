@@ -16,7 +16,7 @@
 
 <script type="text/javascript">
   $(document).ready(function() {
-    const service_oid = "${service_oid}";                  // [선택] 주문번호
+    let service_oid = "${service_oid}";                  // [선택] 주문번호
     const comments = "${comments}";                        // [필수] 상품명
     const billing_key = "${billing_key}"                   // [필수] 빌링키 (카드정보를 암호화 한 키 값)
     const securityCode = "${securityCode}"                 // [필수] 카드 CVC/CVV 번호
@@ -24,11 +24,6 @@
     const currency = "${currency}";                        // [필수] 통화
     const firstName = "${firstName}";                      // [선택] 카드소유주 이름 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 이름으로 결제요청이 됩니다.)
     const lastName = "${lastName}";                        // [선택] 카드소유주 성 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 성으로 결제요청이 됩니다.)
-    const country = "${country}";                          // [선택] 국가 (보내지 않을 경우, 최초 결제시 입력한 국가로 결제요청이 됩니다.)
-    const administrativeArea = "${administrativeArea}";    // [선택] 도/시 (보내지 않을 경우, 최초 결제시 입력한 도/시로 결제요청이 됩니다.)
-    const locality = "${locality}";                        // [선택] 시/구/군 (보내지 않을 경우, 최초 결제시 입력한 시/구/군으로 결제요청이 됩니다.)
-    const address1 = "${address1}";                        // [선택] 도로명  (보내지 않을 경우, 최초 결제시 입력한 도로명으로 결제요청이 됩니다.)
-    const postalCode = "${postalCode}";                    // [선택] 우편번호  (보내지 않을 경우, 최초 결제시 입력한 우편번호로 결제요청이 됩니다.)
     const email = "${email}";                              // [선택] 이메일 주소  (보내지 않을 경우, 최초 결제시 입력한 이메일 주소로 결제요청이 됩니다.)
     const phoneNumber = "${phoneNumber}";                  // [선택] 휴대전화 번호  (보내지 않을 경우, 최초 결제시 입력한 휴대전화 번호로 결제요청이 됩니다.)
     const resultUrl = "${resultUrl}";                      // [선택] 해당 파라미터(resultUrl)는 별도의 기능은 하지 않으나, 파트너사에서 빌링키 결제 성공시 리다이렉트 하는 등 활용할 수 있는 파라미터입니다.
@@ -39,6 +34,7 @@
       
       if (confirm(con) == true) { 
         // 버튼 중복클릭 방지
+        console.log('전송 승인')
         $('#payBillingKey').unbind('click');
 
         let formData = new FormData();
@@ -50,11 +46,6 @@
         formData.append('currency', currency);
         formData.append('firstName', firstName);
         formData.append('lastName', lastName);
-        formData.append('country', country);
-        formData.append('administrativeArea', administrativeArea);
-        formData.append('locality', locality);
-        formData.append('address1', address1);
-        formData.append('postalCode', postalCode);
         formData.append('email', email);
         formData.append('phoneNumber', phoneNumber);
         formData.append('resultUrl', resultUrl);
@@ -80,6 +71,7 @@
               
               // api_id Settings
               api_id = res.api_id;
+              service_oid = res.service_oid;
 
             } else {
               if (res.message) {

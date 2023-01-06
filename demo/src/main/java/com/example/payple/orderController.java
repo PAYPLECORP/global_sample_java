@@ -34,10 +34,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("currency", "USD"); // 통화
 		model.addAttribute("firstName", "Payple"); // 카드소유주 이름
 		model.addAttribute("lastName", "Inc"); // 카드소유주 성
-		model.addAttribute("country", "KR"); // 국가
-		model.addAttribute("address1", "14, Teheran-ro 34-gil, Gangnam-gu"); // 도로명
-		model.addAttribute("locality", "Seoul"); // 시/구/군
-		model.addAttribute("postalCode", "06220"); // 우편번호
 		model.addAttribute("email", "test@payple.kr"); // 이메일 주소
 		model.addAttribute("phoneNumber", "01012345678"); // 휴대전화 번호
 
@@ -59,11 +55,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("firstName", request.getParameter("firstName"));
 		model.addAttribute("phoneNumber", request.getParameter("phoneNumber"));
 		model.addAttribute("email", request.getParameter("email"));
-		model.addAttribute("country", request.getParameter("country"));
-		model.addAttribute("address1", request.getParameter("address1"));
-		model.addAttribute("locality", request.getParameter("locality"));
-		model.addAttribute("administrativeArea", request.getParameter("administrativeArea"));
-		model.addAttribute("postalCode", request.getParameter("postalCode"));
 		model.addAttribute("isDirect", request.getParameter("isDirect"));
 		model.addAttribute("resultUrl", "http://localhost:8080/result"); // 결제결과 반환 URL
 
@@ -113,13 +104,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("currency", request.getParameter("currency")); // 통화
 		model.addAttribute("firstName", request.getParameter("firstName")); // 카드소유주 이름
 		model.addAttribute("lastName", request.getParameter("lastName")); // 카드소유주 성
-		model.addAttribute("address1", request.getParameter("address1")); // 도로명
-		model.addAttribute("locality", request.getParameter("locality")); // 시/구/군
-		model.addAttribute("administrativeArea", request.getParameter("administrativeArea")); // 도/시 (국가가 미국(US), 혹은
-																								// 캐나다(CA)인 경우에는 선택한 도/시
-																								// 코드가 반환됩니다.)
-		model.addAttribute("postalCode", request.getParameter("postalCode")); // 우편번호
-		model.addAttribute("country", request.getParameter("country")); // 국가
 		model.addAttribute("email", request.getParameter("email")); // 이메일 주소
 		model.addAttribute("phoneNumber", request.getParameter("phoneNumber")); // 휴대전화 번호
 		model.addAttribute("billing_key", request.getParameter("billing_key")); // 빌링키 (카드정보를 암호화 한 키 값)
@@ -237,11 +221,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("firstName", request.getParameter("firstName"));
 		model.addAttribute("phoneNumber", request.getParameter("phoneNumber"));
 		model.addAttribute("email", request.getParameter("email"));
-		model.addAttribute("country", request.getParameter("country"));
-		model.addAttribute("address1", request.getParameter("address1"));
-		model.addAttribute("locality", request.getParameter("locality"));
-		model.addAttribute("administrativeArea", request.getParameter("administrativeArea"));
-		model.addAttribute("postalCode", request.getParameter("postalCode"));
 		model.addAttribute("isDirect", request.getParameter("isDirect"));
 		model.addAttribute("resultUrl", "http://localhost:8080/result"); // 결제결과 반환 URL
 
@@ -268,22 +247,17 @@ public class orderController extends GlobalPaypleController {
 
 		// 빌링키 요청 파라미터
 		// service_id 																																	// [필수] 파트너 ID
-		// String service_oid = request.getParameter("service_oid"); 										// [선택] 주문번호
-		String comments = request.getParameter("comments"); 											// [필수] 상품명
-		String billing_key = request.getParameter("billing_key"); 								// [필수] 빌링키 (카드정보를 암호화 한 키 값)
-		String securityCode = request.getParameter("securityCode"); 							// [필수] 카드 CVC/CVV 번호
-		String totalAmount = request.getParameter("totalAmount"); 								// [필수] 결제 요청금액
-		String currency = request.getParameter("currency"); 											// [필수] 통화
-		String firstName = request.getParameter("firstName"); 										// [선택] 카드소유주 이름 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 이름으로 결제요청이 됩니다.)
-		String lastName = request.getParameter("lastName"); 											// [선택] 카드소유주 성 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 성으로 결제요청이 됩니다.)
-		String country = request.getParameter("country"); 												// [선택] 국가 (보내지 않을 경우, 최초 결제시 입력한 국가로 결제요청이 됩니다.)
-		String administrativeArea = request.getParameter("administrativeArea"); 	// [선택] 도/시 (보내지 않을 경우, 최초 결제시 입력한 도/시로 결제요청이 됩니다.)
-		String locality = request.getParameter("locality"); 											// [선택] 시/구/군 (보내지 않을 경우, 최초 결제시 입력한 시/구/군으로 결제요청이 됩니다.)
-		String address1 = request.getParameter("address1"); 											// [선택] 도로명  (보내지 않을 경우, 최초 결제시 입력한 도로명으로 결제요청이 됩니다.)
-		String postalCode = request.getParameter("postalCode"); 									// [선택] 우편번호  (보내지 않을 경우, 최초 결제시 입력한 우편번호로 결제요청이 됩니다.)
-		String email = request.getParameter("email"); 														// [선택] 이메일 주소  (보내지 않을 경우, 최초 결제시 입력한 이메일 주소로 결제요청이 됩니다.)
-		String phoneNumber = request.getParameter("phoneNumber"); 								// [선택] 휴대전화 번호  (보내지 않을 경우, 최초 결제시 입력한 휴대전화 번호로 결제요청이 됩니다.)
-		String resultUrl = request.getParameter("resultUrl"); 										// [선택] 해당 파라미터(resultUrl)는 별도의 기능은 하지 않으나, 파트너사에서 빌링키 결제 성공시 리다이렉트 하는 등 활용할 수 있는 파라미터입니다.
+		// String service_oid = request.getParameter("service_oid"); 					// [선택] 주문번호
+		String comments = request.getParameter("comments"); 						// [필수] 상품명
+		String billing_key = request.getParameter("billing_key"); 				// [필수] 빌링키 (카드정보를 암호화 한 키 값)
+		String securityCode = request.getParameter("securityCode"); 				// [필수] 카드 CVC/CVV 번호
+		String totalAmount = request.getParameter("totalAmount"); 				// [필수] 결제 요청금액
+		String currency = request.getParameter("currency"); 						// [필수] 통화
+		String firstName = request.getParameter("firstName"); 					// [선택] 카드소유주 이름 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 이름으로 결제요청이 됩니다.)
+		String lastName = request.getParameter("lastName"); 						// [선택] 카드소유주 성 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 성으로 결제요청이 됩니다.)
+		String email = request.getParameter("email"); 							// [선택] 이메일 주소  (보내지 않을 경우, 최초 결제시 입력한 이메일 주소로 결제요청이 됩니다.)
+		String phoneNumber = request.getParameter("phoneNumber"); 				// [선택] 휴대전화 번호  (보내지 않을 경우, 최초 결제시 입력한 휴대전화 번호로 결제요청이 됩니다.)
+		String resultUrl = request.getParameter("resultUrl"); 					// [선택] 해당 파라미터(resultUrl)는 별도의 기능은 하지 않으나, 파트너사에서 빌링키 결제 성공시 리다이렉트 하는 등 활용할 수 있는 파라미터입니다.
 
 		try {
 			// 빌링키 결제 요청 전송
@@ -298,11 +272,6 @@ public class orderController extends GlobalPaypleController {
 			bilingObj.put("currency", currency);
 			bilingObj.put("firstName", firstName);
 			bilingObj.put("lastName", lastName);
-			bilingObj.put("country", country);
-			bilingObj.put("administrativeArea", administrativeArea);
-			bilingObj.put("locality", locality);
-			bilingObj.put("address1", address1);
-			bilingObj.put("postalCode", postalCode);
 			bilingObj.put("email", email);
 			bilingObj.put("phoneNumber", phoneNumber);
 			bilingObj.put("resultUrl", resultUrl);
@@ -355,11 +324,6 @@ public class orderController extends GlobalPaypleController {
 				resultObj.put("currency", resultInfoObj.get("currency"));
 				resultObj.put("firstName", resultInfoObj.get("firstName"));
 				resultObj.put("lastName", resultInfoObj.get("lastName"));
-				resultObj.put("address1", resultInfoObj.get("address1"));
-				resultObj.put("locality", resultInfoObj.get("locality"));
-				resultObj.put("administrativeArea", resultInfoObj.get("administrativeArea"));
-				resultObj.put("postalCode", resultInfoObj.get("postalCode"));
-				resultObj.put("country", resultInfoObj.get("country"));
 				resultObj.put("email", resultInfoObj.get("email"));
 				resultObj.put("phoneNumber", resultInfoObj.get("phoneNumber"));
 				resultObj.put("card_number", resultInfoObj.get("card_number"));

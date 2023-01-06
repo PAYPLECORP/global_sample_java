@@ -31,7 +31,7 @@
 		}
 
 		const payCancelAction = function gpayCancelConfirmAction () {
-			const con = "승인취소요청을 전송합니다. \n 진행하시겠습니까? ";
+			const con = "승인취소요청을 전송합니다. \n진행하시겠습니까? ";
 			if (confirm(con) == true) {
 				// 버튼 중복클릭 방지
 				$('#payConfirmCancel').unbind('click');
@@ -172,26 +172,6 @@
 						<tr>
 							<td>lastName</td>
 							<td>${lastName}</td>
-						</tr>
-						<tr>
-							<td>address1</td>
-							<td>${address1}</td>
-						</tr>
-						<tr>
-							<td>locality</td>
-							<td>${locality}</td>
-						</tr>
-						<tr>
-							<td>administrativeArea</td>
-							<td>${administrativeArea}</td>
-						</tr>
-						<tr>
-							<td>postalCode</td>
-							<td>${postalCode}</td>
-						</tr>
-						<tr>
-							<td>country</td>
-							<td>${country}</td>
 						</tr>
 						<tr>
 							<td>email</td>
