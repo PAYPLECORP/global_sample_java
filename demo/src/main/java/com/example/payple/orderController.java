@@ -35,7 +35,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("firstName", "Payple"); // 카드소유주 이름
 		model.addAttribute("lastName", "Inc"); // 카드소유주 성
 		model.addAttribute("email", "test@payple.kr"); // 이메일 주소
-		model.addAttribute("phoneNumber", "01012345678"); // 휴대전화 번호
 
 		return "order";
 	}
@@ -53,7 +52,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("currency", request.getParameter("currency"));
 		model.addAttribute("lastName", request.getParameter("lastName"));
 		model.addAttribute("firstName", request.getParameter("firstName"));
-		model.addAttribute("phoneNumber", request.getParameter("phoneNumber"));
 		model.addAttribute("email", request.getParameter("email"));
 		model.addAttribute("isDirect", request.getParameter("isDirect"));
 		model.addAttribute("resultUrl", "http://localhost:8080/result"); // 결제결과 반환 URL
@@ -105,7 +103,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("firstName", request.getParameter("firstName")); // 카드소유주 이름
 		model.addAttribute("lastName", request.getParameter("lastName")); // 카드소유주 성
 		model.addAttribute("email", request.getParameter("email")); // 이메일 주소
-		model.addAttribute("phoneNumber", request.getParameter("phoneNumber")); // 휴대전화 번호
 		model.addAttribute("billing_key", request.getParameter("billing_key")); // 빌링키 (카드정보를 암호화 한 키 값)
 		model.addAttribute("submitTimeUtc", request.getParameter("submitTimeUtc")); // 결제 시간 (사용자 입장에서 기준이 되는 결제시간: GMT)
 
@@ -219,7 +216,6 @@ public class orderController extends GlobalPaypleController {
 		model.addAttribute("currency", request.getParameter("currency"));
 		model.addAttribute("lastName", request.getParameter("lastName"));
 		model.addAttribute("firstName", request.getParameter("firstName"));
-		model.addAttribute("phoneNumber", request.getParameter("phoneNumber"));
 		model.addAttribute("email", request.getParameter("email"));
 		model.addAttribute("isDirect", request.getParameter("isDirect"));
 		model.addAttribute("resultUrl", "http://localhost:8080/result"); // 결제결과 반환 URL
@@ -256,7 +252,6 @@ public class orderController extends GlobalPaypleController {
 		String firstName = request.getParameter("firstName"); 					// [선택] 카드소유주 이름 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 이름으로 결제요청이 됩니다.)
 		String lastName = request.getParameter("lastName"); 						// [선택] 카드소유주 성 (보내지 않을 경우, 최초 결제시 입력한 카드소유주 성으로 결제요청이 됩니다.)
 		String email = request.getParameter("email"); 							// [선택] 이메일 주소  (보내지 않을 경우, 최초 결제시 입력한 이메일 주소로 결제요청이 됩니다.)
-		String phoneNumber = request.getParameter("phoneNumber"); 				// [선택] 휴대전화 번호  (보내지 않을 경우, 최초 결제시 입력한 휴대전화 번호로 결제요청이 됩니다.)
 		String resultUrl = request.getParameter("resultUrl"); 					// [선택] 해당 파라미터(resultUrl)는 별도의 기능은 하지 않으나, 파트너사에서 빌링키 결제 성공시 리다이렉트 하는 등 활용할 수 있는 파라미터입니다.
 
 		try {
@@ -273,7 +268,6 @@ public class orderController extends GlobalPaypleController {
 			bilingObj.put("firstName", firstName);
 			bilingObj.put("lastName", lastName);
 			bilingObj.put("email", email);
-			bilingObj.put("phoneNumber", phoneNumber);
 			bilingObj.put("resultUrl", resultUrl);
 
 			String bilingURL = "https://demo-api.payple.kr/gpay/billingKey"; // TEST
@@ -325,7 +319,6 @@ public class orderController extends GlobalPaypleController {
 				resultObj.put("firstName", resultInfoObj.get("firstName"));
 				resultObj.put("lastName", resultInfoObj.get("lastName"));
 				resultObj.put("email", resultInfoObj.get("email"));
-				resultObj.put("phoneNumber", resultInfoObj.get("phoneNumber"));
 				resultObj.put("card_number", resultInfoObj.get("card_number"));
 				resultObj.put("submitTimeUtc", resultInfoObj.get("submitTimeUtc"));
 			} else {

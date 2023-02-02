@@ -39,7 +39,6 @@
 			obj.firstName = "${firstName}"; 				// [선택] 카드소유주 이름
 			obj.lastName = "${lastName}"; 					// [선택] 카드소유주 성
 			obj.email = "${email}"; 						// [선택] 이메일 주소
-			obj.phoneNumber = "${phoneNumber}"; 			// [선택] 휴대전화 번호
 			/**
 			 * [필수] 결제결과 반환(Return) URL
 			 * - 결제완료 후 결제결과 파라미터와 함께 리다이렉트 되는 URL 로, 
@@ -99,10 +98,6 @@
 					<tr>
 						<td>결제고객 이름</td>
 						<td>${lastName} ${firstName}</td>
-					</tr>
-					<tr>
-						<td>결제고객 휴대전화번호</td>
-						<td>${phoneNumber}</td>
 					</tr>
 					<tr>
 						<td>결제고객 이메일</td>
